@@ -12,12 +12,12 @@
         <!--ЛОГИН-->
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Label Content="Логин:" Width="60"/>
-            <TextBox x:Name="loginTextBox"  Width="200" />
+            <TextBox x:Name="loginTextBox"  Text="loginDEsgg2018" Width="200" />
         </StackPanel>
         <!--ПАРОЛЬ-->
         <StackPanel Orientation="Horizontal">
             <Label Content="Пароль:" Width="60"/>
-            <PasswordBox x:Name="passwordBox"  Width="200"/>
+            <PasswordBox x:Name="passwordBox" Password="qhgYnW"  Width="200"/>
         </StackPanel>
         <!--КНОПКИ-->
         <StackPanel Orientation="Horizontal">

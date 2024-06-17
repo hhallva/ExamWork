@@ -1,4 +1,5 @@
-﻿using ExamWork.Pages;
+﻿using ExamWork.Classes;
+using ExamWork.Pages;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,8 @@ namespace ExamWork
 
             App.CurrentFrame = MainFrame;
             MainFrame.Navigate(new AuthorizationPage());
+
+            this.Title = DataAccessLayer.ConnectionString;
         }
     }
 }

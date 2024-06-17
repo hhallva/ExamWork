@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamWork.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,12 +28,15 @@ namespace ExamWork.Pages
 
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
+            
             //проверка существует ли такой пользователь в бд 
-            if (true)
+            if (DataAccessLayer.IsUser(loginTextBox.Text, passwordBox.Password))
             {
+                MessageBox.Show("ок");
                 //всё супер пропускаем
             }
             else 
+                MessageBox.Show("не ок");
             {
                 //всё плохо сообщение о том что нет такого пользователя
             }
