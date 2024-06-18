@@ -35,9 +35,9 @@ namespace ExamWork.Pages
                 MessageBox.Show("ок");
                 //всё супер пропускаем
             }
-            else 
-                MessageBox.Show("не ок");
+            else  
             {
+                MessageBox.Show("не ок");
                 //всё плохо сообщение о том что нет такого пользователя
             }
         }
