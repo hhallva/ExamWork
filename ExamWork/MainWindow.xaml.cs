@@ -18,14 +18,14 @@ namespace ExamWork
     /// </summary>
     public partial class MainWindow : Window
     {
+        public User CurrentUser { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
             App.CurrentFrame = MainFrame;
             MainFrame.Navigate(new AuthorizationPage());
-
-            this.Title = DataAccessLayer.ConnectionString;
         }
     }
 }

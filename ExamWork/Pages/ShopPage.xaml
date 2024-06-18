@@ -10,15 +10,45 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
-            <!-- New row for header stripe -->
             <RowDefinition Height="*"/>
-            <!-- Auto-adjust height for content -->
             <RowDefinition Height="Auto"/>
-            <!-- Fixed height for the buttons -->
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <!--ШАПКА-->
+        <DockPanel Grid.Row="0">
+            <Button x:Name="ExitButton" Width="40" DockPanel.Dock="Right" HorizontalAlignment="Right" Click="ExitButton_Click" BorderBrush="White">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/exit.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.5" ScaleY="0.5"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="СartButton" Width="40" DockPanel.Dock="Right" HorizontalAlignment="Right" Click="СartButton_Click" BorderBrush="White">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/cart.png">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.5" ScaleY="0.5"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
+                </Button.Background>
+            </Button>
+
+            <Label Margin="0,8,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <TextBlock x:Name="UserFullnameTextBlock" TextDecorations="Underline" Text="Гость"/>
+            </Label>
+                <Image Source="/Images/user.png" Margin="0,10,0,10" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+        </DockPanel>
+
+        <!--ПОИСК И ФИЛЬТРАЦИЯ-->
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -45,102 +75,19 @@
             </DockPanel>
         </Grid>
 
-        <ScrollViewer Grid.Row="1">
+        <!--ТОВАРЫ-->
+        <ScrollViewer Grid.Row="2">
             <StackPanel x:Name="MainStackPanel">
-                <!-- Dynamic content will be added here -->
+                <!-- Здесь будет добавлен динамический контент -->
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+        <!--КНОПКИ-->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
             <Button Width="120" Height="25" Content="Назад" 
         Background="#4e4f4e" Foreground="White" FontFamily="Kobern" Margin="0,0,10,0"/>
             <Button Width="100" Height="25" Content="Вперёд" 
         Background="#4e4f4e" Foreground="White" FontFamily="Kobern"/>
         </StackPanel>
-
-        <!--
-    
-    
-   
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <DockPanel Grid.Column="1"  >
-            <Button Content="Просмотр заказа" Width="100" Height="20"/>
-        </DockPanel>
-        -->
-        <!--Листалка товаров-->
-        <!--
-        <ScrollViewer>
-            <ListView x:Name="goodsListView" >
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA" Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Height="100" Width="600" Background="#FFEAEAEA"  Margin="0,5,0,5">
-                    <Label Content="Наименования товара" FontWeight="Bold" />
-                    <Label Content="Описание товара"/>
-                    <Label Content="Производитель"/>
-                    <StackPanel Orientation="Horizontal" >
-                        <Label Content="Цена:" Width="476"/>
-                        <Label Content="Размер скидки" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </StackPanel>
-            </ListView>
-        </ScrollViewer>
-    </Grid>-->
     </Grid>
 </Page>

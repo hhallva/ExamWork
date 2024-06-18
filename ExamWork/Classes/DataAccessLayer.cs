@@ -1,11 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace ExamWork.Classes
 {
@@ -22,7 +15,7 @@ namespace ExamWork.Classes
             {
                 SqlConnectionStringBuilder builder = new()
                 {
-                    DataSource = ServerName, 
+                    DataSource = ServerName,
                     UserID = Login,
                     //Password = Password,
                     InitialCatalog = DatabaseName,
@@ -46,6 +39,30 @@ namespace ExamWork.Classes
             command.Parameters.AddWithValue("@password", password);
 
             return command.ExecuteScalar() != null;
+        }
+
+        public static User GetUserData(string login, string password)
+        {
+            SqlConnection connection = new(ConnectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM ExamUser WHERE UserLogin = @login AND UserPassword = @password";
+
+            SqlCommand command = new(query, connection);
+            command.Parameters.AddWithValue("@login", login);
+            command.Parameters.AddWithValue("@password", password);
+
+            var reader = command.ExecuteReader();
+            User user = new()
+            {
+                Name = reader["UserName"].ToString(),
+                Patronymic = reader["UserPatronymic"].ToString(),
+                Surname = reader["UserSurname"].ToString(),
+                UserLogin = reader["UserLogin"].ToString(),
+                UserPassword = reader["UserPassword"].ToString(),
+                RoleID = (int)reader["RoleID"],
+            };
+            return user;
         }
     }
 }

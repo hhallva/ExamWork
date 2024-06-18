@@ -18,7 +18,8 @@ namespace ExamWork.Pages
         {
             if (DataAccessLayer.IsUserExist(loginTextBox.Text, passwordBox.Password))
             {
-                App.CurrentFrame.Navigate(new ShopPage());
+                App.CurrentFrame.Navigate(new ShopPage()); 
+                DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password);
             }
             else
             {
@@ -27,6 +28,8 @@ namespace ExamWork.Pages
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             }
+
+
         }
 
         private void GuestButton_Click(object sender, RoutedEventArgs e)

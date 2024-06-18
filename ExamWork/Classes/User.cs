@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ExamWork.Classes
 {
-    internal class User
+    public class User
     {
-        //свойства которым в последствии мы будет присваивать значения из БД
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public string Surname { get; set; }

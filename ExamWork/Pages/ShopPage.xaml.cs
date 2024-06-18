@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamWork.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace ExamWork.Pages
         public ShopPage()
         {
             InitializeComponent();
+
+          
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            //необходимо реализовать выход на главнй экран
+        }
+
+        private void СartButton_Click(object sender, RoutedEventArgs e)
+        {
+            //необходимо реализовать переход на страницу карзины
         }
     }
 }
