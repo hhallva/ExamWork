@@ -1,4 +1,5 @@
 ﻿using ExamWork.Classes;
+using DAL = ExamWork.Classes.DataAccessLayer;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,9 +21,9 @@ namespace ExamWork.Pages
 
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataAccessLayer.IsUserExist(loginTextBox.Text, passwordBox.Password))
+            if (DAL.IsUserExist(loginTextBox.Text, passwordBox.Password))
             {
-                User user = DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password);
+                User user = DAL.GetUserData(loginTextBox.Text, passwordBox.Password);
                 AcceptUserData(user);
 
                 App.CurrentFrame.Navigate(new ShopPage());
