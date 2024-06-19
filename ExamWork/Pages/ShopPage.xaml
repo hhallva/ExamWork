@@ -13,7 +13,6 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--ШАПКА-->
@@ -81,13 +80,5 @@
                 <!-- Здесь будет добавлен динамический контент -->
             </StackPanel>
         </ScrollViewer>
-
-        <!--КНОПКИ-->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <Button Width="120" Height="25" Content="Назад" 
-        Background="#4e4f4e" Foreground="White" FontFamily="Kobern" Margin="0,0,10,0"/>
-            <Button Width="100" Height="25" Content="Вперёд" 
-        Background="#4e4f4e" Foreground="White" FontFamily="Kobern"/>
-        </StackPanel>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace ExamWork.Classes
 {
@@ -53,14 +54,18 @@ namespace ExamWork.Classes
             command.Parameters.AddWithValue("@password", password);
 
             var reader = command.ExecuteReader();
+
+            DataTable table = new();
+            table.Load(reader);
+           
             User user = new()
             {
-                Name = reader["UserName"].ToString(),
-                Patronymic = reader["UserPatronymic"].ToString(),
-                Surname = reader["UserSurname"].ToString(),
-                UserLogin = reader["UserLogin"].ToString(),
-                UserPassword = reader["UserPassword"].ToString(),
-                RoleID = (int)reader["RoleID"],
+                Name = table.Rows[0]["UserName", DataRowVersion.Current].ToString(),
+                Patronymic = table.Rows[0]["UserPatronymic", DataRowVersion.Current].ToString(),
+                Surname = table.Rows[0]["UserSurname", DataRowVersion.Current].ToString(),
+                UserLogin = table.Rows[0]["UserLogin", DataRowVersion.Current].ToString(),
+                UserPassword = table.Rows[0]["UserPassword", DataRowVersion.Current].ToString(),
+                RoleID = Convert.ToInt32(table.Rows[0]["RoleID", DataRowVersion.Current]),
             };
             return user;
         }

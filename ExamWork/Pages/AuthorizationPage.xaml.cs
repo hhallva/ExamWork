@@ -9,17 +9,25 @@ namespace ExamWork.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+        public delegate void SendUser(User user);
+
+        public static event SendUser onUserSend;
+
         public AuthorizationPage()
         {
             InitializeComponent();
+
+            //Логинов Федот Святославович
+            loginTextBox.Text = "loginDEgtt2018";
+            passwordBox.Password = "7YD|BR";
         }
 
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataAccessLayer.IsUserExist(loginTextBox.Text, passwordBox.Password))
             {
-                App.CurrentFrame.Navigate(new ShopPage()); 
-                DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password);
+                onUserSend(DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password)); 
+                App.CurrentFrame.Navigate(new ShopPage());
             }
             else
             {
