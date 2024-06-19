@@ -18,7 +18,6 @@ namespace ExamWork
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal User CurrentUser { get; set; } 
 
         public MainWindow()
         {
@@ -26,12 +25,6 @@ namespace ExamWork
 
             App.CurrentFrame = MainFrame;
             MainFrame.Navigate(new AuthorizationPage());
-            AuthorizationPage.onUserSend += AuthorizationPage_onUserSend;
-        }
-
-        void AuthorizationPage_onUserSend(User user)
-        {
-            CurrentUser = user;
         }
     }
 }

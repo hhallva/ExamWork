@@ -14,11 +14,13 @@
             <Label Content="Логин:" Width="60"/>
             <TextBox x:Name="loginTextBox" Width="200" />
         </StackPanel>
+        
         <!--ПАРОЛЬ-->
         <StackPanel Orientation="Horizontal">
             <Label Content="Пароль:" Width="60"/>
             <PasswordBox x:Name="passwordBox" Width="200"/>
         </StackPanel>
+        
         <!--КНОПКИ-->
         <StackPanel Orientation="Horizontal">
             <Button x:Name="authorizationButton" Content="Авторизоваться" Margin="0,5,5,0" Width="165" Click="AuthorizationButton_Click"/>

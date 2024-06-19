@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="OOO ''Ароматный мир'' " Height="450" Width="800">
     <Grid>
-        <!--NavigationUIVisibility="Hidden"-->
-        <Frame x:Name="MainFrame"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

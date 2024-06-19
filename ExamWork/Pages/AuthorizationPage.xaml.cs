@@ -9,24 +9,22 @@ namespace ExamWork.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
-        public delegate void SendUser(User user);
-
-        public static event SendUser onUserSend;
-
         public AuthorizationPage()
         {
             InitializeComponent();
 
-            //Логинов Федот Святославович
-            loginTextBox.Text = "loginDEgtt2018";
-            passwordBox.Password = "7YD|BR";
+            //Значения для теста В КОНЦЕ УБРАТЬ
+            loginTextBox.Text = "loginDEmgu2018";
+            passwordBox.Password = "0gC3bk";
         }
 
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataAccessLayer.IsUserExist(loginTextBox.Text, passwordBox.Password))
             {
-                onUserSend(DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password)); 
+                User user = DataAccessLayer.GetUserData(loginTextBox.Text, passwordBox.Password);
+                AcceptUserData(user);
+
                 App.CurrentFrame.Navigate(new ShopPage());
             }
             else
@@ -36,13 +34,24 @@ namespace ExamWork.Pages
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             }
-
-
         }
 
         private void GuestButton_Click(object sender, RoutedEventArgs e)
         {
+            User user = new();
+            AcceptUserData(user);
+
             App.CurrentFrame.Navigate(new ShopPage());
+        }
+
+        private static void AcceptUserData(User user)
+        {
+            App.Current.Resources["UserName"] = user._name;
+            App.Current.Resources["UserSurname"] = user._surname;
+            App.Current.Resources["UserPatronymic"] = user._patronymic;
+            App.Current.Resources["UserLogin"] = user._login;
+            App.Current.Resources["UserPassword"] = user._password;
+            App.Current.Resources["RoleID"] = user._roleID;
         }
     }
 }

@@ -60,12 +60,12 @@ namespace ExamWork.Classes
            
             User user = new()
             {
-                Name = table.Rows[0]["UserName", DataRowVersion.Current].ToString(),
-                Patronymic = table.Rows[0]["UserPatronymic", DataRowVersion.Current].ToString(),
-                Surname = table.Rows[0]["UserSurname", DataRowVersion.Current].ToString(),
-                UserLogin = table.Rows[0]["UserLogin", DataRowVersion.Current].ToString(),
-                UserPassword = table.Rows[0]["UserPassword", DataRowVersion.Current].ToString(),
-                RoleID = Convert.ToInt32(table.Rows[0]["RoleID", DataRowVersion.Current]),
+                _name = table.Rows[0]["UserName", DataRowVersion.Current].ToString(),
+                _patronymic = table.Rows[0]["UserPatronymic", DataRowVersion.Current].ToString(),
+                _surname = table.Rows[0]["UserSurname", DataRowVersion.Current].ToString(),
+                _login = table.Rows[0]["UserLogin", DataRowVersion.Current].ToString(),
+                _password = table.Rows[0]["UserPassword", DataRowVersion.Current].ToString(),
+                _roleID = Convert.ToInt32(table.Rows[0]["RoleID", DataRowVersion.Current]),
             };
             return user;
         }

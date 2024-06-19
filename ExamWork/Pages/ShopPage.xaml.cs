@@ -25,17 +25,19 @@ namespace ExamWork.Pages
         {
             InitializeComponent();
 
-          
+            UserFullnameTextBlock.Text = $"{App.Current.Resources["UserName"].ToString()} " +
+                                         $"{App.Current.Resources["UserSurname"].ToString()} " +
+                                         $"{App.Current.Resources["UserPatronymic"].ToString()}";
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            //необходимо реализовать выход на главнй экран
+            App.CurrentFrame.Navigate(new AuthorizationPage());
         }
 
         private void СartButton_Click(object sender, RoutedEventArgs e)
         {
-            //необходимо реализовать переход на страницу карзины
+            //необходимо реализовать переход в корзину
         }
     }
 }
