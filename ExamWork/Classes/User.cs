@@ -9,23 +9,23 @@ namespace ExamWork.Classes
     public class User
     {
         #region Свойства
-        public string _name { get; set; }
-        public string _patronymic { get; set; }
-        public string _surname { get; set; }
-        public string _login { get; set; }
-        public string _password { get; set; }
-        public int _roleID { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public string Surname { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public int RoleID { get; set; }
         #endregion
 
         #region Констуркторы 
         public User(string name, string patronymic, string surname, string login, string password, int role)
         {
-            _name = name;
-            _patronymic = patronymic;
-            _surname = surname;
-            _login = login;
-            _password = password;
-            _roleID = role;
+            Name = name;
+            Patronymic = patronymic;
+            Surname = surname;
+            Login = login;
+            Password = password;
+            RoleID = role;
         }
 
         public User() : this("Гость", string.Empty, string.Empty, string.Empty, string.Empty, 2) { }

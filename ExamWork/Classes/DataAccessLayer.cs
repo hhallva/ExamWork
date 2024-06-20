@@ -57,17 +57,47 @@ namespace ExamWork.Classes
 
             DataTable table = new();
             table.Load(reader);
-           
+
             User user = new()
             {
-                _name = table.Rows[0]["UserName", DataRowVersion.Current].ToString(),
-                _patronymic = table.Rows[0]["UserPatronymic", DataRowVersion.Current].ToString(),
-                _surname = table.Rows[0]["UserSurname", DataRowVersion.Current].ToString(),
-                _login = table.Rows[0]["UserLogin", DataRowVersion.Current].ToString(),
-                _password = table.Rows[0]["UserPassword", DataRowVersion.Current].ToString(),
-                _roleID = Convert.ToInt32(table.Rows[0]["RoleID", DataRowVersion.Current]),
+                Name = table.Rows[0]["UserName", DataRowVersion.Current].ToString(),
+                Patronymic = table.Rows[0]["UserPatronymic", DataRowVersion.Current].ToString(),
+                Surname = table.Rows[0]["UserSurname", DataRowVersion.Current].ToString(),
+                Login = table.Rows[0]["UserLogin", DataRowVersion.Current].ToString(),
+                Password = table.Rows[0]["UserPassword", DataRowVersion.Current].ToString(),
+                RoleID = Convert.ToInt32(table.Rows[0]["RoleID", DataRowVersion.Current]),
             };
             return user;
+        }
+
+        public static List<Product> GetProductsData()
+        {
+            SqlConnection connection = new(ConnectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM ExamProduct";
+            SqlCommand command = new(query, connection);
+
+            var reader = command.ExecuteReader();
+
+            List<Product> products = new();
+            while (reader.Read())
+            {
+                Product product = new()
+                {
+                    ArticleNumber = reader["ProductArticleNumber"].ToString(),
+                    Name = reader["ProductName"].ToString(),
+                    Description = reader["ProductDescription"].ToString(),
+                    Category = reader["ProductCategory"].ToString(),
+                    Manufacturer = reader["ProductManufacturer"].ToString(),
+                    Cost = Convert.ToDouble(reader["ProductCost"]),
+                    DiscountAmount = Convert.ToInt32(reader["ProductDiscountAmount"]),
+                    QuantityInStock = Convert.ToInt32(reader["ProductQuantityInStock"]),
+                    Status = reader["ProductStatus"].ToString(),
+                };
+                products.Add(product);
+            }
+            return products;
         }
     }
 }

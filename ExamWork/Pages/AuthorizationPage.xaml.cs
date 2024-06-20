@@ -47,12 +47,12 @@ namespace ExamWork.Pages
 
         private static void AcceptUserData(User user)
         {
-            App.Current.Resources["UserName"] = user._name;
-            App.Current.Resources["UserSurname"] = user._surname;
-            App.Current.Resources["UserPatronymic"] = user._patronymic;
-            App.Current.Resources["UserLogin"] = user._login;
-            App.Current.Resources["UserPassword"] = user._password;
-            App.Current.Resources["RoleID"] = user._roleID;
+            App.Current.Resources["UserName"] = user.Name;
+            App.Current.Resources["UserSurname"] = user.Surname;
+            App.Current.Resources["UserPatronymic"] = user.Patronymic;
+            App.Current.Resources["UserLogin"] = user.Login;
+            App.Current.Resources["UserPassword"] = user.Password;
+            App.Current.Resources["RoleID"] = user.RoleID;
         }
     }
 }
