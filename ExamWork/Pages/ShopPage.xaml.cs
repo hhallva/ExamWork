@@ -25,8 +25,8 @@ namespace ExamWork.Pages
         {
             InitializeComponent();
 
-            UserFullnameTextBlock.Text = $"{App.Current.Resources["UserName"].ToString()} " +
-                                         $"{App.Current.Resources["UserSurname"].ToString()} " +
+            UserFullnameTextBlock.Text = $"{App.Current.Resources["UserSurname"].ToString()} " +
+                                         $"{App.Current.Resources["UserName"].ToString()} " +
                                          $"{App.Current.Resources["UserPatronymic"].ToString()}";
         }
 
