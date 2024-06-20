@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Images\cart.png" />
     <None Remove="Images\exit.png" />
+    <None Remove="Images\logo.png" />
     <None Remove="Images\user.png" />
   </ItemGroup>
 
@@ -28,6 +29,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\user.png">

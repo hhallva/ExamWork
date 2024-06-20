@@ -13,7 +13,6 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Background" Value="White"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Template">
@@ -28,5 +27,34 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="HoverImage">
+            <Style.Triggers>
+                <Trigger Property="Image.IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="30" Duration="0:0:0.1"/>            
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="20" Duration="0:0:0.1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
     </Application.Resources>
 </Application>
+
+    
+    

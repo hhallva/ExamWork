@@ -25,17 +25,17 @@ namespace ExamWork.Pages
         {
             InitializeComponent();
 
-            UserFullnameTextBlock.Text = $"{App.Current.Resources["UserSurname"].ToString()} " +
+            UserFullnameLabel.Content = $"{App.Current.Resources["UserSurname"].ToString()} " +
                                          $"{App.Current.Resources["UserName"].ToString()} " +
                                          $"{App.Current.Resources["UserPatronymic"].ToString()}";
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitImage_MouseDown(object sender, RoutedEventArgs e)
         {
             App.CurrentFrame.Navigate(new AuthorizationPage());
         }
 
-        private void СartButton_Click(object sender, RoutedEventArgs e)
+        private void CartImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //необходимо реализовать переход в корзину
         }

@@ -39,8 +39,8 @@
 
             <!--КНОПКИ-->
             <DockPanel Height="35">
-                <Button x:Name="authorizationButton" Content="Авторизоваться" Margin="0,5,20,0" Click="AuthorizationButton_Click" Width="120" />
-                <Button x:Name="guestButton" Content="Войти как гость" Margin="0,5,0,0" Click="GuestButton_Click"/>
+                <Button x:Name="authorizationButton" Content="Авторизоваться" Margin="0,5,20,0" Click="AuthorizationButton_Click" Width="120" Background="White"/>
+                <Button x:Name="guestButton" Content="Войти как гость" Margin="0,5,0,0" Click="GuestButton_Click" Background="White"/>
             </DockPanel>
         </StackPanel>
 
