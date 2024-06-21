@@ -35,7 +35,7 @@
             </Grid>
         </Border>
 
-
+        <!--ПОИСК И ФИЛЬТРАЦИЯ-->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -70,7 +70,7 @@
                     <ComboBoxItem Content="15 % и более"/>
                 </ComboBox>
 
-                <ComboBox x:Name="sortComboBox" SelectedIndex="0" Width="150"  Margin="5" Grid.Column="1">
+                <ComboBox x:Name="sortComboBox" SelectedIndex="0" Width="150"  Margin="5" Grid.Column="1" SelectionChanged="SortComboBox_SelectionChanged">
                     <ComboBoxItem Content="По возрастанию"/>
                     <ComboBoxItem Content="По убыванию"/>
                 </ComboBox>
@@ -80,37 +80,7 @@
         <!--ТОВАРЫ-->
         <ScrollViewer Grid.Row="2">
             <StackPanel x:Name="MainStackPanel">
-                <Border Height="120" Background="#FFE0DFDF" Margin="10">
-                    <StackPanel Margin="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0">
-                                <Label Content="Название товара" HorizontalAlignment="Left" FontSize="16"/>
-                                <Label Content="производитель" HorizontalAlignment="Left" Margin="0,-10,0,0"  Foreground="#FF989090"/>
-                                <Label Content="Длинное описание товара в несолько слов" HorizontalAlignment="Left"/>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Цена:" FontSize="16"/>
-                                    <TextBlock Text="500,00 " FontSize="18" Height="20"/>
-                                    <TextBlock Text="1000,00 " HorizontalAlignment="Left" FontSize="16" TextDecorations="Strikethrough" Foreground="#FF5D5D5D"/>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <Label Content="-50%" FontSize="40"  Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,10,5" Background="Chartreuse"/>
-
-                            <Border Background="#FFCEC2C2" Height="100" Grid.Column="2">
-                                <Image Source="/Images/product.png"/>
-                            </Border>
-                        </Grid>
-                    </StackPanel>
-                </Border>
-               
-                <!-- Здесь будет добавлен динамический контент -->
+                <!-- Сюда генерируются товары-->
             </StackPanel>
         </ScrollViewer>
     </Grid>
