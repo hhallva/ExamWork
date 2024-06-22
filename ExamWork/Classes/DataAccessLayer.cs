@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.Logging;
 using System.Data;
+
 
 namespace ExamWork.Classes
 {
@@ -28,6 +30,7 @@ namespace ExamWork.Classes
         }
         #endregion
 
+        //Метод определяющий существует ли пользователь в БД или нет (для авторизации)
         public static bool IsUserExist(string login, string password)
         {
             SqlConnection connection = new(ConnectionString);
@@ -42,6 +45,7 @@ namespace ExamWork.Classes
             return command.ExecuteScalar() != null;
         }
 
+        //Метод получающий данные пользователя из БД  
         public static User GetUserData(string login, string password)
         {
             SqlConnection connection = new(ConnectionString);
@@ -70,12 +74,13 @@ namespace ExamWork.Classes
             return user;
         }
 
-        public static List<Product> GetProductsData()
+        //Метод получающий данные о товарах в соответствии с выбранными фильтами
+        public static List<Product> GetProductsData(string addQuery)
         {
             SqlConnection connection = new(ConnectionString);
             connection.Open();
 
-            string query = "SELECT * FROM ExamProduct";
+            string query = $"SELECT * FROM ExamProduct {addQuery}";
             SqlCommand command = new(query, connection);
 
             var reader = command.ExecuteReader();

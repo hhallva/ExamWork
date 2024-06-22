@@ -14,22 +14,37 @@ namespace ExamWork.Pages
     public partial class ShopPage : Page
     {
         internal List<Product> Products { get; set; }
+        public string SortQuery { get; set; }
+
         public ShopPage()
         {
             InitializeComponent();
+        }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             //Вывод ФИО на страницу
             UserFullnameLabel.Content = $"{App.Current.Resources["UserSurname"].ToString()} " +
                                          $"{App.Current.Resources["UserName"].ToString()} " +
                                          $"{App.Current.Resources["UserPatronymic"].ToString()}";
 
-            Products = DAL.GetProductsData();
+            SortComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
+            DiscountFilterComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+
+            
+
+            Products = DAL.GetProductsData(SortQuery);
             foreach (Product product in Products)
             {
                 CreateProductContainer(product);
             }
         }
 
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //обработка изменения строки поиска
+        }
 
         private void ExitImage_MouseDown(object sender, RoutedEventArgs e)
         {
@@ -38,6 +53,7 @@ namespace ExamWork.Pages
 
         private void CartImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
             //необходимо реализовать переход в корзину
         }
 
@@ -157,34 +173,40 @@ namespace ExamWork.Pages
 
             Grid.SetColumn(stackPanel2, 0);
             Grid.SetColumn(imageBorder, 2);
-
-
-
         }
 
-        private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem selectedItem = (ComboBoxItem)e.AddedItems[0];
+            string sortQuery = string.Empty;
+            string discountQuery = string.Empty;
 
-            switch (selectedItem.Content.ToString())
+            switch (SortComboBox.SelectedIndex)
             {
-                case "По возрастанию":
-                    SortByAscending(Products);
+                case 0:
+                    sortQuery = "ORDER BY ProductCost ASC";
                     break;
-                case "По убыванию":
-                    SortByDescending(Products);
+                case 1:
+                    sortQuery = "ORDER BY ProductCost DESC";
                     break;
             }
-        }
 
-        static void SortByAscending(List<Product> products)
-        {
-            products.Sort((product1, product2) => product1.Cost.CompareTo(product2.Cost));
-        }
+            switch (DiscountFilterComboBox.SelectedIndex)
+            {
+                case 0:
+                    discountQuery = "";
+                    break;
+                case 1:
+                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 0 AND 9.99";
+                    break;
+                case 2:
+                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 10 AND 14.99";
+                    break;
+                case 3:
+                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 15 AND 100";
+                    break;
+            }
 
-        static void SortByDescending(List<Product> products)
-        {
-            products.Sort((product1, product2) => product2.Cost.CompareTo(product1.Cost));
+            SortQuery = $"{discountQuery} {sortQuery}";
         }
     }
 }
