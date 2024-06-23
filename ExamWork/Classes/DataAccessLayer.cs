@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic.Logging;
 using System.Data;
 
 
@@ -45,7 +44,7 @@ namespace ExamWork.Classes
             return command.ExecuteScalar() != null;
         }
 
-        //Метод получающий данные пользователя из БД  
+        //Метод получающий данные пользователя из БД 
         public static User GetUserData(string login, string password)
         {
             SqlConnection connection = new(ConnectionString);
@@ -75,12 +74,12 @@ namespace ExamWork.Classes
         }
 
         //Метод получающий данные о товарах в соответствии с выбранными фильтами
-        public static List<Product> GetProductsData(string addQuery)
+        public static List<Product> GetProductsData(string filtersQuery)
         {
             SqlConnection connection = new(ConnectionString);
             connection.Open();
 
-            string query = $"SELECT * FROM ExamProduct {addQuery}";
+            string query = $"SELECT * FROM ExamProduct {filtersQuery}";
             SqlCommand command = new(query, connection);
 
             var reader = command.ExecuteReader();
@@ -103,6 +102,25 @@ namespace ExamWork.Classes
                 products.Add(product);
             }
             return products;
+        }
+
+        //Метод получабщий количество товаров
+        public static int GetProductsCount()
+        {
+            SqlConnection connection = new(ConnectionString);
+            connection.Open();
+
+            string query = $"SELECT * FROM ExamProduct";
+            SqlCommand command = new(query, connection);
+
+            var reader = command.ExecuteReader();
+
+            int count = 0;
+            while (reader.Read())
+            {
+                count++;
+            }
+            return count;
         }
     }
 }

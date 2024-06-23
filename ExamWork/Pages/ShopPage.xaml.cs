@@ -8,9 +8,6 @@ using DAL = ExamWork.Classes.DataAccessLayer;
 
 namespace ExamWork.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для ShopPage.xaml
-    /// </summary>
     public partial class ShopPage : Page
     {
         internal List<Product> Products { get; set; }
@@ -20,43 +17,73 @@ namespace ExamWork.Pages
         {
             InitializeComponent();
         }
-
+        
+        //Метод загружающий данные после загрузки страницы
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //Вывод ФИО на страницу
             UserFullnameLabel.Content = $"{App.Current.Resources["UserSurname"].ToString()} " +
                                          $"{App.Current.Resources["UserName"].ToString()} " +
                                          $"{App.Current.Resources["UserPatronymic"].ToString()}";
+            //Подписка на обновление данных
+            SortComboBox.SelectionChanged += QueryBuilder;
+            DiscountFilterComboBox.SelectionChanged += QueryBuilder;
+            SearchTextBox.TextChanged += QueryBuilder;
 
-            SortComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
-            DiscountFilterComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
-            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+            //Загружаем изначальные данные без фильтров
+            UpdateProduct();
+        }
 
-            
-
+        //Метод выводящий карточки товаров
+        private void UpdateProduct()
+        {
             Products = DAL.GetProductsData(SortQuery);
             foreach (Product product in Products)
             {
                 CreateProductContainer(product);
             }
+            countLabel.Content = $"Показано {Products.Count} из {DAL.GetProductsCount()}";
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //Метод для сбора данных из фильтров и поиска, и для составления запроса в БД
+        private void QueryBuilder(object sender, RoutedEventArgs e)
         {
-            //обработка изменения строки поиска
+            //Очищаем все карточки товаров
+            MainStackPanel.Children.Clear();
+
+            //Сбор запроса в соответствии с данными фильтов 
+            SortQuery = $"WHERE ProductName LIKE '%{SearchTextBox.Text}%'";
+            switch (DiscountFilterComboBox.SelectedIndex)
+            {
+                case 0:
+                    SortQuery += "";
+                    break;
+                case 1:
+                    SortQuery += "AND ProductDiscountAmount BETWEEN 0 AND 9.99";
+                    break;
+                case 2:
+                    SortQuery += "AND ProductDiscountAmount BETWEEN 10 AND 14.99";
+                    break;
+                case 3:
+                    SortQuery += "AND ProductDiscountAmount BETWEEN 15 AND 100";
+                    break;
+            }
+
+            switch (SortComboBox.SelectedIndex)
+            {
+                case 0:
+                    SortQuery += " ORDER BY ROUND(ProductCost - (ProductCost * ProductDiscountAmount*0.01),2) ASC";
+                    break;
+                case 1:
+                    SortQuery += " ORDER BY ROUND(ProductCost - (ProductCost * ProductDiscountAmount*0.01),2) DESC";
+                    break;
+            }
+
+            //Обновляем карточки товаров
+            UpdateProduct();
         }
 
-        private void ExitImage_MouseDown(object sender, RoutedEventArgs e)
-        {
-            App.CurrentFrame.Navigate(new AuthorizationPage());
-        }
-
-        private void CartImage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-            //необходимо реализовать переход в корзину
-        }
-
+        //Метод для создания карточек товаров из листа товаров
         private void CreateProductContainer(Product product)
         {
             Border border = new()
@@ -143,6 +170,8 @@ namespace ExamWork.Pages
 
             stackPanel3.Children.Add(textLabel);
             stackPanel3.Children.Add(discounCostTextBlock);
+
+            //Условие для скидко (чтоб скидка была показана и цена перечеркнута)
             if (product.DiscountAmount > 0)
             {
                 TextBlock CostTextBlock = new()
@@ -175,38 +204,17 @@ namespace ExamWork.Pages
             Grid.SetColumn(imageBorder, 2);
         }
 
-        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //Метод отправляющий нас на стартовую страницу
+        private void ExitImage_MouseDown(object sender, RoutedEventArgs e)
         {
-            string sortQuery = string.Empty;
-            string discountQuery = string.Empty;
-
-            switch (SortComboBox.SelectedIndex)
-            {
-                case 0:
-                    sortQuery = "ORDER BY ProductCost ASC";
-                    break;
-                case 1:
-                    sortQuery = "ORDER BY ProductCost DESC";
-                    break;
-            }
-
-            switch (DiscountFilterComboBox.SelectedIndex)
-            {
-                case 0:
-                    discountQuery = "";
-                    break;
-                case 1:
-                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 0 AND 9.99";
-                    break;
-                case 2:
-                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 10 AND 14.99";
-                    break;
-                case 3:
-                    discountQuery = "WHERE ProductDiscountAmount BETWEEN 15 AND 100";
-                    break;
-            }
-
-            SortQuery = $"{discountQuery} {sortQuery}";
+            App.CurrentFrame.Navigate(new AuthorizationPage());
         }
+
+        //Метод отправляющий нас на страницу карзины
+        private void CartImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //необходимо реализовать переход в корзину
+        }
+
     }
 }
