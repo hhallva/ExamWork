@@ -1,4 +1,5 @@
 ﻿using ExamWork.Classes;
+using Microsoft.VisualBasic.ApplicationServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -93,9 +94,10 @@ namespace ExamWork.Pages
                 Margin = new Thickness(10)
             };
 
-            StackPanel stackPanel1 = new()
+            StackPanel productStackPanel = new()
             {
                 Margin = new Thickness(10),
+                Tag = product.ArticleNumber,
             };
 
             Grid grid = new Grid();
@@ -155,9 +157,9 @@ namespace ExamWork.Pages
             };
 
             MainStackPanel.Children.Add(border);
-            border.Child = stackPanel1;
+            border.Child = productStackPanel;
 
-            stackPanel1.Children.Add(grid);
+            productStackPanel.Children.Add(grid);
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
@@ -202,6 +204,36 @@ namespace ExamWork.Pages
 
             Grid.SetColumn(stackPanel2, 0);
             Grid.SetColumn(imageBorder, 2);
+
+
+            //Контекствое меню
+            MenuItem addProductItem = new() 
+            {
+                Header = "Добавить к заказу",
+            };
+            addProductItem.Click += AddProduct_Click;
+
+            ContextMenu productContextMenu = new();
+            productContextMenu.Items.Add(addProductItem);
+
+            //Проверка на роль
+            switch (Convert.ToInt32(App.Current.Resources["RoleID"]))
+            {
+                case 1: //Менеджек
+
+                    break;
+                case 3://Администратор
+
+                    break;
+            }
+            
+            MainStackPanel.ContextMenu = productContextMenu;
+            
+        }
+
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+           //необходимо реализовать добавление товара в корзину
         }
 
         //Метод отправляющий нас на стартовую страницу
