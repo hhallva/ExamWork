@@ -29,6 +29,7 @@ namespace ExamWork.Classes
         }
         #endregion
 
+        #region Методы
         //Метод определяющий существует ли пользователь в БД или нет (для авторизации)
         public static bool IsUserExist(string login, string password)
         {
@@ -122,5 +123,6 @@ namespace ExamWork.Classes
             }
             return count;
         }
+        #endregion
     }
 }

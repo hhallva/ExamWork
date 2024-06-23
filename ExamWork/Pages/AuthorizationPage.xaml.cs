@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace ExamWork.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthorizationPage.xaml
-    /// </summary>
     public partial class AuthorizationPage : Page
     {
         public AuthorizationPage()
@@ -19,6 +16,8 @@ namespace ExamWork.Pages
             passwordBox.Password = "0gC3bk";
         }
 
+        #region Методы
+        //Метод для выполнения авторизации пользователя
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
             if (DAL.IsUserExist(loginTextBox.Text, passwordBox.Password))
@@ -37,6 +36,7 @@ namespace ExamWork.Pages
             }
         }
 
+        //Метод для выполнения авторизации пользователя как гостя
         private void GuestButton_Click(object sender, RoutedEventArgs e)
         {
             User user = new();
@@ -45,6 +45,7 @@ namespace ExamWork.Pages
             App.CurrentFrame.Navigate(new ShopPage());
         }
 
+        //Метод для присвоения ресурсам значений 
         private static void AcceptUserData(User user)
         {
             App.Current.Resources["UserName"] = user.Name;
@@ -54,5 +55,6 @@ namespace ExamWork.Pages
             App.Current.Resources["UserPassword"] = user.Password;
             App.Current.Resources["RoleID"] = user.RoleID;
         }
+        #endregion
     }
 }

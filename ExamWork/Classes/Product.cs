@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace ExamWork.Classes
 {
     internal class Product 
-    { 
+    {
+        #region Свойства 
         public string ArticleNumber { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,6 +19,6 @@ namespace ExamWork.Classes
         public int DiscountAmount { get; set; }
         public int QuantityInStock { get; set; }
         public string Status { get; set; }
-
+        #endregion
     }
 }
